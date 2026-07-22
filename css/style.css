@@ -9,7 +9,7 @@
    FUNDO DA PÁGINA (Com Esferas/Orbes Azuis)
    ========================================== */
 body {
-  background-color: #030712; /* Fundo base bem escuro para realçar os luzes */
+  background-color: #030712; /* Fundo base bem escuro para realçar as luzes */
   color: #1e293b;
   min-height: 100vh;
   display: flex;
@@ -27,6 +27,10 @@ body {
     radial-gradient(circle at 50% 75%, rgba(59, 130, 246, 0.3) 0%, transparent 45%),
     radial-gradient(circle at 85% 85%, rgba(2, 132, 199, 0.25) 0%, transparent 40%);
   background-attachment: fixed;
+  
+  /* Ativa a animação contínua e suave de 18 segundos */
+  animation: moverOrbes 18s ease-in-out infinite;
+  background-size: 140% 140%;
 }
 
 .main-wrapper {
@@ -314,4 +318,19 @@ body {
   width: 90%;
   backdrop-filter: blur(12px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================================
+   ANIMAÇÃO DE MOVIMENTO SUAVE DOS ORBES
+   ========================================== */
+@keyframes moverOrbes {
+  0% {
+    background-position: 0% 0%, 100% 0%, 50% 100%, 100% 100%;
+  }
+  50% {
+    background-position: 30% 20%, 70% 40%, 30% 80%, 80% 60%;
+  }
+  100% {
+    background-position: 0% 0%, 100% 0%, 50% 100%, 100% 100%;
+  }
 }
