@@ -1,5 +1,5 @@
 :root {
-  --primary-blue: #0d47a1; /* Azul escuro da logo Ultra */
+  --primary-blue: #0d47a1;
   --light-blue: #e8f0fe;
   --bg-color: #f0f4f8;
   --card-bg: #ffffff;
@@ -45,10 +45,9 @@ body {
   max-width: 80%;
 }
 
-/* Controla o tamanho exato da logo */
 .logo {
   width: 100%;
-  max-height: 40px; 
+  max-height: 42px;
   object-fit: contain;
 }
 
@@ -57,3 +56,139 @@ body {
   border: none;
   cursor: pointer;
   font-size: 18px;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  background-color: var(--light-blue);
+  padding: 4px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 10px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-blue);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background-color: var(--primary-blue);
+  color: #ffffff;
+}
+
+.form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #666;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+input[type="text"], select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  outline: none;
+  font-size: 14px;
+}
+
+input[type="text"]:focus, select:focus {
+  border-color: var(--primary-blue);
+}
+
+.btn-group {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-toggle {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  background-color: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+}
+
+.btn-toggle.active {
+  border-color: var(--primary-blue);
+  background-color: var(--light-blue);
+  color: var(--primary-blue);
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.2s;
+}
+
+.btn-submit:hover {
+  background-color: #083375;
+}
+
+.result-container {
+  display: none;
+  margin-top: 20px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 16px;
+}
+
+.result-container.active {
+  display: block;
+}
+
+.input-copy-group {
+  display: flex;
+  gap: 8px;
+}
+
+.input-copy-group button {
+  padding: 0 12px;
+  background: var(--light-blue);
+  color: var(--primary-blue);
+  border: 1px solid var(--primary-blue);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.input-copy-group button.copied {
+  background-color: #28a745;
+  color: white;
+  border-color: #28a745;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 12px;
+  color: #777;
+  font-weight: 500;
+}
