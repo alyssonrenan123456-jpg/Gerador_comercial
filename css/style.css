@@ -370,3 +370,37 @@ input[type="text"]:focus, select:focus {
   font-size: 13px;
   color: #64748b;
 }
+
+/* ==========================================
+   Estilos do Expandível de Logins Extras
+   ========================================== */
+.login-duplicado-container {
+  margin-top: 12px;
+  width: 100%;
+}
+
+.btn-toggle-duplicado {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1e40af; /* Azul condizente com a interface */
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.btn-toggle-duplicado::-webkit-details-marker {
+  display: none; /* Remove seta padrão em Safari/WebKit */
+}
+
+.btn-toggle-duplicado:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.campos-duplicados {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
