@@ -1,15 +1,48 @@
 const express = require('express');
-const { createClient } = require('@libsql/client');
 const path = require('path');
 const ipaddr = require('ipaddr.js');
 
 const app = express();
 
-// Conexão com tratamento do token e protocolo libsql://
-const db = createClient({
-  url: 'libsql://logscomercial-alyssonrenan123456-jpg.aws-us-east-1.turso.io',
-  authToken: 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3ODQ3MjI4NTgsImlkIjoiMDE5Zjg5YzMtYzIwMS03ZmFmLWI1YjItZTU1ZjUzNGZjZTAzIiwia2lkIjoicDRjeVRXTlZ5YWUtMXRUSkh6S2w0ZU54bUZVRm8ySXhTaDdTRHJkRWJxQSIsInJpZCI6IjdlNmU4MzYyLTg1YzUtNDIyOC04NTAxLTE4YThlMTQzNzU4MCJ9.zje1JEqAcrMc1b-md3gVOH9L6eV1vrnAYNakSVpcoAYqH8nV43L48JzHkq843jYnRCZfZELPPeeUTyokkFt5CA'.trim()
-});
+// Configurações do Turso
+const TURSO_URL = 'https://logscomercial-alyssonrenan123456-jpg.aws-us-east-1.turso.io';
+const TURSO_TOKEN = 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3ODQ3MjUwMzAsImlkIjoiMDE5Zjg5YzMtYzIwMS03ZmFmLWI1YjItZTU1ZjUzNGZjZTAzIiwia2lkIjoicDRjeVRXTlZ5YWUtMXRUSkh6S2w0ZU54bUZVRm8ySXhTaDdTRHJkRWJxQSIsInJpZCI6IjdlNmU4MzYyLTg1YzUtNDIyOC04NTAxLTE4YThlMTQzNzU4MCJ9.aImecEtcqGR-mNyMWcKdm8Wft7hLcej2umoDoiVXejtv_XDBF7EUAOdpBlpS17ufbW66kiA1S6O2AKasNNElBA';
+
+// Função para executar SQL direto na API HTTP do Turso
+async function queryTurso(sql, args = []) {
+  const response = await fetch(`${TURSO_URL}/v2/pipeline`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${TURSO_TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      requests: [
+        {
+          type: 'execute',
+          stmt: {
+            sql: sql,
+            args: args.map(arg => ({ type: 'text', value: String(arg) }))
+          }
+        },
+        { type: 'close' }
+      ]
+    })
+  });
+
+  const data = await response.json();
+  
+  if (!response.ok) {
+    throw new Error(data.message || 'Erro ao conectar ao Turso');
+  }
+
+  const result = data.results[0];
+  if (result.type === 'error') {
+    throw new Error(result.error.message);
+  }
+
+  return result.response.result;
+}
 
 const FAIXA_ADMIN_AUTORIZADA = '177.37.73.0/24';
 
@@ -66,10 +99,10 @@ app.post('/api/logs', async (req, res) => {
     const data = agora.toLocaleDateString('pt-BR');
     const horario = agora.toLocaleTimeString('pt-BR');
 
-    await db.execute({
-      sql: 'INSERT INTO logs (atendente, login_criado, senha_criada, data, horario, ip_origem) VALUES (?, ?, ?, ?, ?, ?)',
-      args: [atendente, login_criado, senha_criada, data, horario, ipOrigem]
-    });
+    await queryTurso(
+      'INSERT INTO logs (atendente, login_criado, senha_criada, data, horario, ip_origem) VALUES (?, ?, ?, ?, ?, ?)',
+      [atendente, login_criado, senha_criada, data, horario, ipOrigem || '']
+    );
 
     res.json({ success: true });
   } catch (err) {
@@ -81,8 +114,16 @@ app.post('/api/logs', async (req, res) => {
 // Rota de Buscar Logs
 app.get('/api/admin/logs', verificarIpAdmin, async (req, res) => {
   try {
-    const result = await db.execute('SELECT * FROM logs ORDER BY id DESC');
-    const rows = result.rows;
+    const resTurso = await queryTurso('SELECT id, atendente, login_criado, senha_criada, data, horario, ip_origem FROM logs ORDER BY id DESC');
+    
+    const cols = resTurso.cols.map(c => c.name);
+    const rows = resTurso.rows.map(row => {
+      const obj = {};
+      row.forEach((cell, idx) => {
+        obj[cols[idx]] = cell.value;
+      });
+      return obj;
+    });
 
     const logsAgrupados = rows.reduce((acc, item) => {
       if (!acc[item.data]) acc[item.data] = [];
