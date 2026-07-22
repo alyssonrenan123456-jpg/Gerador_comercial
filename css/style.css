@@ -213,11 +213,24 @@ body {
   text-decoration: underline;
 }
 
+/* Rodapé */
 .footer {
   color: #94a3b8;
   font-size: 0.8rem;
   text-align: center;
   margin-top: 20px;
+}
+
+.footer-link {
+  color: #94a3b8;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
 }
 
 .footer-dev {
