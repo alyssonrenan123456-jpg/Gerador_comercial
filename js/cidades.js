@@ -1,7 +1,5 @@
-<select id="cidade">
-
-<option value="">Selecione a cidade...</option>
-
+const CIDADES = {
+    
 <option value="bnu">Brunópolis</option>
 <option value="cnv">Campos Novos</option>
 <option value="ctb">Curitibanos</option>
@@ -66,5 +64,16 @@
 <option value="sji">São João do Itaperiú</option>
 <option value="gva">Garuva</option>
 <option value="itp">Itapoá</option>
-
+  }
 </select>
+
+document.addEventListener('DOMContentLoaded', () => {
+    const selectCidade = document.getElementById('cidade');
+
+    for (const [nomeCidade, sigla] of Object.entries(CIDADES)) {
+        const option = document.createElement('option');
+        option.value = sigla;
+        option.textContent = nomeCidade;
+        selectCidade.appendChild(option);
+    }
+});
