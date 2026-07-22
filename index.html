@@ -1,77 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Login - Ultra Telecom</title>
-
+    <title>Ultra Telecom - Gerador de Login</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-<div class="container">
+    <main class="card">
+        <header class="card-header">
+            <img src="img/logo.png" alt="Logo Ultra Telecom" class="logo">
+            <h1>Gerador de Login</h1>
+        </header>
 
-    <img src="img/logo.png" alt="Ultra Telecom" class="logo">
-
-    <h1>Gerador de Login</h1>
-
-    <div class="campo">
-        <label for="nome">Nome do Cliente</label>
-        <input
-            type="text"
-            id="nome"
-            placeholder="Digite o nome do cliente">
-    </div>
-
-    <div class="campo">
-        <label for="cidade">Cidade</label>
-
-        <select id="cidade">
-            <option value="">Carregando cidades...</option>
-        </select>
-    </div>
-
-    <button onclick="gerarLogin()">
-        Gerar Login
-    </button>
-
-    <div id="resultado">
-
-        <div class="resultado-item">
-
-            <div>
-                <h3>Usuário</h3>
-                <p id="usuario"></p>
+        <form id="loginForm" class="card-body">
+            <div class="input-group">
+                <label for="nome">Nome do Cliente</label>
+                <input type="text" id="nome" placeholder="Digite o nome completo" required autocomplete="off">
             </div>
 
-            <button onclick="copiar('usuario')">
-                Copiar
-            </button>
-
-        </div>
-
-        <div class="resultado-item">
-
-            <div>
-                <h3>Senha</h3>
-                <p id="senha"></p>
+            <div class="input-group">
+                <label for="cidade">Cidade</label>
+                <select id="cidade" required>
+                    <option value="" disabled selected>Selecione uma cidade...</option>
+                </select>
             </div>
 
-            <button onclick="copiar('senha')">
-                Copiar
-            </button>
+            <button type="submit" id="btnGerar" class="btn-primary">Gerar Login</button>
+        </form>
 
-        </div>
+        <section class="result-container" id="resultContainer">
+            <hr class="divider">
+            
+            <div class="result-group">
+                <label for="usuarioResult">Usuário</label>
+                <div class="input-copy-wrapper">
+                    <input type="text" id="usuarioResult" readonly>
+                    <button type="button" class="btn-copy" onclick="copiarTexto('usuarioResult', this)">Copiar</button>
+                </div>
+            </div>
 
-    </div>
+            <div class="result-group">
+                <label for="senhaResult">Senha</label>
+                <div class="input-copy-wrapper">
+                    <input type="text" id="senhaResult" readonly>
+                    <button type="button" class="btn-copy" onclick="copiarTexto('senhaResult', this)">Copiar</button>
+                </div>
+            </div>
+        </section>
+    </main>
 
-</div>
-
-<script src="js/cidades.js"></script>
-<script src="js/script.js"></script>
-
+    <script src="js/cidades.js"></script>
+    <script src="js/script.js"></script>
 </body>
-
 </html>
