@@ -372,35 +372,32 @@ input[type="text"]:focus, select:focus {
 }
 
 /* ==========================================
-   Estilos do Expandível de Logins Extras
+   Botão de Variação / Login Duplicado
    ========================================== */
-.login-duplicado-container {
-  margin-top: 12px;
-  width: 100%;
+.regenerate-wrapper {
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px dashed #e2e8f0;
+  text-align: center;
 }
 
-.btn-toggle-duplicado {
+.btn-link-variacao {
+  background: none;
+  border: none;
+  color: #2563eb;
   font-size: 0.8rem;
   font-weight: 600;
-  color: #1e40af; /* Azul condizente com a interface */
   cursor: pointer;
-  list-style: none;
-  user-select: none;
-  transition: color 0.2s ease;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.btn-toggle-duplicado::-webkit-details-marker {
-  display: none; /* Remove seta padrão em Safari/WebKit */
-}
-
-.btn-toggle-duplicado:hover {
+.btn-link-variacao:hover {
   color: #1d4ed8;
+  background-color: #eff6ff;
   text-decoration: underline;
-}
-
-.campos-duplicados {
-  margin-top: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
 }
