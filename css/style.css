@@ -1,130 +1,75 @@
-:root {
-  --blue-primary: #0052cc;
-  --blue-hover: #003e99;
-  --blue-glow: rgba(0, 82, 204, 0.4);
-  --dark-navy: #0a192f;
-  --card-bg: rgba(255, 255, 255, 0.96);
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --border-light: #e2e8f0;
-  --border-active: #0052cc;
-}
-
+/* ==========================================
+   RESET E ESTILOS GERAIS
+   ========================================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 body {
-  background: radial-gradient(circle at 50% 20%, #1e3a8a 0%, #0a192f 100%);
+  background-color: #0b2545;
+  background-image: radial-gradient(#1e3a8a 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: #1e293b;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  color: var(--text-main);
-  position: relative;
-  overflow-x: hidden;
-}
-
-/* Fundo Vetorial simulando Fibra Óptica / Conexões */
-.bg-network-overlay {
-  position: absolute;
-  inset: 0;
-  background-image: 
-    radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0),
-    radial-gradient(rgba(0, 102, 255, 0.15) 2px, transparent 0);
-  background-size: 32px 32px, 64px 64px;
-  background-position: 0 0, 16px 16px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Navbar Fixa */
-.navbar {
-  position: relative;
-  z-index: 10;
-  background-color: rgba(7, 18, 36, 0.85);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 16px 32px;
-}
-
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
+  padding: 20px;
 }
 
-.brand-logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo-img {
-  height: 42px; /* Dimensionamento adequado para a logo */
-  width: auto;
-  object-fit: contain;
-}
-
-/* Invólucro Principal */
+/* ==========================================
+   CARD PRINCIPAL
+   ========================================== */
 .main-wrapper {
-  position: relative;
-  z-index: 5;
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
-}
-
-/* Card Principal (SaaS Portal) */
-.portal-card {
-  background: var(--card-bg);
   width: 100%;
-  max-width: 460px;
-  border-radius: 20px;
-  padding: 36px;
-  box-shadow: 
-    0 25px 50px -12px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  animation: cardFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: 480px;
+  margin: auto;
 }
 
-.card-header {
-  margin-bottom: 28px;
-  text-align: left;
+.portal-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 32px 24px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
 }
 
 .card-header h2 {
-  font-size: 20px;
+  font-size: 1.35rem;
   font-weight: 700;
-  color: var(--text-main);
-  letter-spacing: -0.3px;
+  color: #0f172a;
   margin-bottom: 6px;
 }
 
 .card-header p {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.5;
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 24px;
 }
 
-/* Form e Inputs */
+/* ==========================================
+   FORMULÁRIO E INPUTS
+   ========================================== */
+.form-portal {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .form-group {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .form-group label {
-  display: block;
-  font-size: 11px;
+  font-size: 0.75rem;
   font-weight: 700;
   color: #334155;
-  margin-bottom: 8px;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.5px;
 }
 
 .input-icon-wrapper {
@@ -135,247 +80,137 @@ body {
 
 .input-icon {
   position: absolute;
-  left: 14px;
+  left: 12px;
   width: 18px;
   height: 18px;
-  color: #94a3b8;
+  stroke: #94a3b8;
   pointer-events: none;
-  transition: color 0.2s ease;
 }
 
-input[type="text"], select {
-  width: 100%;
-  padding: 13px 14px 13px 42px;
-  background: #f8fafc;
-  border: 1.5px solid var(--border-light);
-  border-radius: 12px;
-  font-size: 14px;
-  color: var(--text-main);
-  outline: none;
-  transition: all 0.25s ease;
-  appearance: none;
-}
-
-input[type="text"]::placeholder {
-  color: #94a3b8;
-}
-
-input[type="text"]:focus, select:focus {
-  background: #ffffff;
-  border-color: var(--border-active);
-  box-shadow: 0 0 0 4px rgba(0, 82, 204, 0.1);
-}
-
-.input-icon-wrapper:focus-within .input-icon {
-  color: var(--blue-primary);
-}
-
-/* Seta no Select */
+.input-icon-wrapper input,
 .input-icon-wrapper select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%94a3b8' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  cursor: pointer;
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  font-size: 0.9rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background-color: #f8fafc;
+  outline: none;
+  transition: all 0.2s;
 }
 
-/* Botão Principal */
+.input-icon-wrapper input:focus,
+.input-icon-wrapper select:focus {
+  border-color: #0284c7;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+/* ==========================================
+   BOTÃO PRINCIPAL
+   ========================================== */
 .btn-primary {
   width: 100%;
-  padding: 15px;
-  background: linear-gradient(135deg, #0052cc 0%, #003e99 100%);
+  padding: 14px;
+  background-color: #0046b8;
   color: #ffffff;
-  border: none;
-  border-radius: 12px;
-  font-size: 14px;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-  box-shadow: 0 10px 20px -5px var(--blue-glow);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  gap: 8px;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #003690;
 }
 
 .btn-arrow {
   width: 18px;
   height: 18px;
-  transition: transform 0.2s ease;
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 28px -4px var(--blue-glow);
-}
-
-.btn-primary:hover .btn-arrow {
-  transform: translateX(4px);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
-}
-
-/* Bloco de Resultado */
+/* ==========================================
+   CARD DE RESULTADO
+   ========================================== */
 .result-card {
   display: none;
-  margin-top: 28px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border-light);
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
 }
 
 .result-card.active {
   display: block;
-  animation: slideUp 0.4s ease forwards;
 }
 
 .result-header {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #059669;
-  font-size: 12px;
-  font-weight: 700;
+  color: #16a34a;
+  font-weight: 600;
+  font-size: 0.85rem;
   margin-bottom: 16px;
 }
 
 .check-icon {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
 }
 
 .result-grid {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .result-field label {
-  font-size: 10px;
-  font-weight: 800;
-  color: var(--text-muted);
-  margin-bottom: 6px;
-  display: block;
-  letter-spacing: 0.5px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #64748b;
 }
 
 .copy-box {
   display: flex;
   gap: 8px;
+  margin-top: 4px;
 }
 
 .copy-box input {
-  padding-left: 14px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  flex: 1;
+  padding: 10px;
+  font-family: monospace;
   font-weight: 600;
-  font-size: 14px;
   background: #f1f5f9;
-  border-color: #cbd5e1;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
 }
 
 .copy-box button {
-  padding: 0 18px;
+  padding: 0 16px;
   background: #e0e7ff;
   color: #3730a3;
   border: none;
-  border-radius: 10px;
-  font-weight: 700;
-  font-size: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.8rem;
   cursor: pointer;
-  transition: all 0.2s ease;
 }
 
 .copy-box button:hover {
   background: #c7d2fe;
 }
 
-.copy-box button.copied {
-  background: #10b981;
-  color: #ffffff;
-}
-
-/* Rodapé */
-.footer {
-  position: relative;
-  z-index: 10;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 16px 24px;
-  font-size: 12px;
-  color: #64748b;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.footer-dev strong {
-  color: #94a3b8;
-}
-
-/* Animações */
-@keyframes cardFadeIn {
-  from { opacity: 0; transform: translateY(20px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Responsividade Mobile */
-@media (max-width: 640px) {
-  .navbar { padding: 12px 16px; }
-  .portal-card { padding: 24px; }
-  .footer {
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
-  }
-}
-/* Modal de Identificação do Atendente */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(10, 25, 47, 0.85);
-  backdrop-filter: blur(8px);
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
-.modal-box {
-  background: #ffffff;
-  padding: 28px;
-  border-radius: 16px;
-  max-width: 400px;
-  width: 100%;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-  text-align: center;
-}
-
-.modal-box h3 {
-  font-size: 18px;
-  color: #0f172a;
-  margin-bottom: 8px;
-}
-
-.modal-box p {
-  font-size: 13px;
-  color: #64748b;
-}
-
-/* ==========================================
-   Botão de Variação / Login Duplicado
-   ========================================== */
+/* Botão de Variação */
 .regenerate-wrapper {
-  margin-top: 15px;
+  margin-top: 16px;
   padding-top: 12px;
   border-top: 1px dashed #e2e8f0;
   text-align: center;
@@ -388,16 +223,21 @@ input[type="text"]:focus, select:focus {
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
 }
 
 .btn-link-variacao:hover {
-  color: #1d4ed8;
-  background-color: #eff6ff;
   text-decoration: underline;
+}
+
+/* Rodapé */
+.footer {
+  color: #94a3b8;
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.footer-dev {
+  display: block;
+  margin-top: 4px;
 }
