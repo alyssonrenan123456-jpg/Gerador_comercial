@@ -6,8 +6,8 @@ const ipaddr = require('ipaddr.js');
 const app = express();
 
 const db = createClient({
-  url: process.env.TURSO_DATABASE_URL,
-  authToken: process.env.TURSO_AUTH_TOKEN,
+  url: 'libsql://logscomercial-alyssonrenan123456-jpg.aws-us-east-1.turso.io', // Cole a URL do Turso aqui
+  authToken: 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3ODQ3MjI4NTgsImlkIjoiMDE5Zjg5YzMtYzIwMS03ZmFmLWI1YjItZTU1ZjUzNGZjZTAzIiwia2lkIjoicDRjeVRXTlZ5YWUtMXRUSkh6S2w0ZU54bUZVRm8ySXhTaDdTRHJkRWJxQSIsInJpZCI6IjdlNmU4MzYyLTg1YzUtNDIyOC04NTAxLTE4YThlMTQzNzU4MCJ9.zje1JEqAcrMc1b-md3gVOH9L6eV1vrnAYNakSVpcoAYqH8nV43L48JzHkq843jYnRCZfZELPPeeUTyokkFt5CA',       // Cole o Token do Turso aqui
 });
 
 const FAIXA_ADMIN_AUTORIZADA = '177.37.73.0/24';
