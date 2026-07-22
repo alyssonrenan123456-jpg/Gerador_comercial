@@ -1,3 +1,6 @@
+/* ==========================================
+   RESET E ESTILOS GERAIS
+   ========================================== */
 * {
   margin: 0;
   padding: 0;
@@ -6,11 +9,11 @@
 }
 
 body {
-  /* Gradiente moderno e elegante em tons de azul da tecnologia */
+  /* Fundo base suave para o vidro fosco se destacar */
   background: 
-    radial-gradient(circle at 50% 30%, rgba(37, 99, 235, 0.25) 0%, transparent 60%),
-    radial-gradient(circle at 80% 80%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
-    linear-gradient(135deg, #0b192e 0%, #0f2942 50%, #1e3a8a 100%);
+    radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 40%),
+    linear-gradient(135deg, #0b1c35 0%, #0f233f 100%);
   
   background-attachment: fixed;
   color: #1e293b;
@@ -22,6 +25,9 @@ body {
   padding: 20px;
 }
 
+/* ==========================================
+   CARD PRINCIPAL - O EFEITO DE VIDRO FOSCO
+   ========================================== */
 .main-wrapper {
   width: 100%;
   max-width: 480px;
@@ -29,22 +35,33 @@ body {
 }
 
 .portal-card {
-  background: #ffffff;
+  /* --- Efeito Glassmorphism --- */
+  background: rgba(255, 255, 255, 0.05); /* Levemente translúcido (quase transparente) */
   border-radius: 16px;
   padding: 32px 24px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px); /* O "fosco" - Desfoque do fundo atrás do card */
+  -webkit-backdrop-filter: blur(20px); /* Suporte para Safari */
+  
+  /* Borda sutil de vidro para dar definição */
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+  
+  /* Sombra sutil que flutua o vidro */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
+/* ==========================================
+   ESTILOS DENTRO DO CARD (AJUSTES PARA O VIDRO)
+   ========================================== */
 .card-header h2 {
   font-size: 1.35rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #ffffff; /* Ajuste para branco para contrastar com o vidro escuro */
   margin-bottom: 6px;
 }
 
 .card-header p {
   font-size: 0.85rem;
-  color: #64748b;
+  color: #cbd5e1; /* Ajuste para um cinza claro suave */
   margin-bottom: 24px;
 }
 
@@ -63,7 +80,7 @@ body {
 .form-group label {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #334155;
+  color: #e2e8f0; /* Ajuste para cinza bem claro para legibilidade */
   letter-spacing: 0.5px;
 }
 
@@ -78,7 +95,7 @@ body {
   left: 12px;
   width: 18px;
   height: 18px;
-  stroke: #94a3b8;
+  stroke: #cbd5e1; /* Ajuste para ícones mais claros */
   pointer-events: none;
 }
 
@@ -87,24 +104,35 @@ body {
   width: 100%;
   padding: 12px 12px 12px 40px;
   font-size: 0.9rem;
-  border: 1px solid #e2e8f0;
+  /* Inputs leves para não quebrar a estética */
+  border: 1px solid rgba(255, 255, 255, 0.05); 
   border-radius: 10px;
-  background-color: #f8fafc;
+  background-color: rgba(255, 255, 255, 0.02); 
+  color: #f1f5f9; /* Texto claro para inputs */
   outline: none;
   transition: all 0.2s;
 }
 
-.input-icon-wrapper input:focus,
-.input-icon-wrapper select:focus {
-  border-color: #0284c7;
-  background-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+/* Placeholder claro e discreto */
+.input-icon-wrapper input::placeholder,
+.input-icon-wrapper select::placeholder {
+  color: #94a3b8;
 }
 
+.input-icon-wrapper input:focus,
+.input-icon-wrapper select:focus {
+  border-color: rgba(2, 132, 199, 0.5); /* Borda azul de foco */
+  background-color: rgba(255, 255, 255, 0.05); /* Fundo sutil de foco */
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1); /* Brilho suave */
+}
+
+/* ==========================================
+   BOTÃO PRINCIPAL
+   ========================================== */
 .btn-primary {
   width: 100%;
   padding: 14px;
-  background-color: #0046b8;
+  background: linear-gradient(135deg, #0284c7 0%, #0046b8 100%); /* Gradiente no botão para dar destaque */
   color: #ffffff;
   font-weight: 700;
   font-size: 0.9rem;
@@ -116,11 +144,15 @@ body {
   align-items: center;
   gap: 8px;
   margin-top: 8px;
-  transition: background 0.2s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  /* Sombra sutil no botão */
+  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
 }
 
 .btn-primary:hover {
-  background-color: #003690;
+  transform: translateY(-2px); /* Efeito de elevação sutil no hover */
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
 }
 
 .btn-arrow {
@@ -128,11 +160,14 @@ body {
   height: 18px;
 }
 
+/* ==========================================
+   CARD DE RESULTADO
+   ========================================== */
 .result-card {
   display: none;
   margin-top: 24px;
   padding-top: 20px;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05); /* Borda transparente */
 }
 
 .result-card.active {
@@ -143,7 +178,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #16a34a;
+  color: #4ade80; /* Tom de verde mais vibrante para contraste */
   font-weight: 600;
   font-size: 0.85rem;
   margin-bottom: 16px;
@@ -163,7 +198,7 @@ body {
 .result-field label {
   font-size: 0.7rem;
   font-weight: 700;
-  color: #64748b;
+  color: #94a3b8; /* Cinza suave para labels */
 }
 
 .copy-box {
@@ -177,64 +212,62 @@ body {
   padding: 10px;
   font-family: monospace;
   font-weight: 600;
-  background: #f1f5f9;
-  border: 1px solid #cbd5e1;
+  background: rgba(255, 255, 255, 0.02); /* Inputs de resultado leves e translúcidos */
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 8px;
+  color: #f1f5f9;
 }
 
 .copy-box button {
   padding: 0 16px;
-  background: #e0e7ff;
-  color: #3730a3;
-  border: none;
+  background: rgba(2, 132, 199, 0.1); /* Botões de cópia leves */
+  color: #0284c7; /* Azul sutil */
+  border: 1px solid rgba(2, 132, 199, 0.1);
   border-radius: 8px;
   font-weight: 600;
   font-size: 0.8rem;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
 .copy-box button:hover {
-  background: #c7d2fe;
+  background: rgba(2, 132, 199, 0.15);
+  color: #0ea5e9;
 }
 
+/* ==========================================
+   BOTÃO DE VARIAÇÃO / LOGIN DUPLICADO
+   ========================================== */
 .regenerate-wrapper {
   margin-top: 16px;
   padding-top: 12px;
-  border-top: 1px dashed #e2e8f0;
+  border-top: 1px dashed rgba(255, 255, 255, 0.05); /* Borda transparente */
   text-align: center;
 }
 
 .btn-link-variacao {
   background: none;
   border: none;
-  color: #2563eb;
+  color: #0ea5e9; /* Azul bem claro e visível */
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
 .btn-link-variacao:hover {
+  color: #38bdf8; /* Azul ainda mais claro no hover */
   text-decoration: underline;
 }
 
-/* Rodapé */
+/* ==========================================
+   RODAPÉ
+   ========================================== */
 .footer {
-  color: #94a3b8;
+  color: #cbd5e1; /* Cinza claro suave */
   font-size: 0.8rem;
   text-align: center;
   margin-top: 20px;
-}
-
-.footer-link {
-  color: #94a3b8;
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-.footer-link:hover {
-  color: #ffffff;
-  text-decoration: underline;
 }
 
 .footer-dev {
@@ -242,14 +275,16 @@ body {
   margin-top: 4px;
 }
 
-/* Modal */
+/* ==========================================
+   MODAL (Ajuste para Glassmorphism)
+   ========================================== */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6); /* Overlay mais escuro */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -257,9 +292,33 @@ body {
 }
 
 .modal-box {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.05); /* Modal de vidro também */
   padding: 24px;
   border-radius: 12px;
   max-width: 400px;
   width: 90%;
+  backdrop-filter: blur(15px); /* Menor desfoque para modal */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  color: #f1f5f9;
+}
+
+.modal-box h3 {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+/* Input do modal também precisa de estilo */
+.modal-box input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  color: #f1f5f9;
+  font-size: 0.9rem;
+}
+
+.modal-box input::placeholder {
+  color: #94a3b8;
 }
