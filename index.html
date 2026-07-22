@@ -1,57 +1,84 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultra Telecom - Gerador de Login</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Login - Ultra</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <main class="card">
-        <header class="card-header">
-            <img src="img/logo.png" alt="Logo Ultra Telecom" class="logo">
-            <h1>Gerador de Login</h1>
-        </header>
+  <main class="card-container">
+    <header class="card-header">
+      <div class="logo-area">
+        <img src="img/logo.png" alt="Logo Ultra" class="logo">
+      </div>
+      <button id="themeToggle" class="btn-icon" title="Alternar tema">☀️</button>
+    </header>
 
-        <form id="loginForm" class="card-body">
-            <div class="input-group">
-                <label for="nome">Nome do Cliente</label>
-                <input type="text" id="nome" placeholder="Digite o nome completo" required autocomplete="off">
-            </div>
+    <nav class="tabs">
+      <button type="button" class="tab-btn active">Gerador de Login</button>
+      <button type="button" class="tab-btn">Formatador de MAC</button>
+    </nav>
 
-            <div class="input-group">
-                <label for="cidade">Cidade</label>
-                <select id="cidade" required>
-                    <option value="" disabled selected>Selecione uma cidade...</option>
-                </select>
-            </div>
+    <form id="loginForm" class="form">
+      <div class="form-group">
+        <label for="nome">NOME DO CLIENTE</label>
+        <input type="text" id="nome" placeholder="Ex: João Silva" required autocomplete="off">
+      </div>
 
-            <button type="submit" id="btnGerar" class="btn-primary">Gerar Login</button>
-        </form>
+      <div class="form-group">
+        <label>TIPO DE LOGIN</label>
+        <div class="btn-group">
+          <button type="button" class="btn-toggle active">REDE NEUTRA</button>
+          <button type="button" class="btn-toggle">PADRÃO / LOCAL</button>
+        </div>
+      </div>
 
-        <section class="result-container" id="resultContainer">
-            <hr class="divider">
-            
-            <div class="result-group">
-                <label for="usuarioResult">Usuário</label>
-                <div class="input-copy-wrapper">
-                    <input type="text" id="usuarioResult" readonly>
-                    <button type="button" class="btn-copy" onclick="copiarTexto('usuarioResult', this)">Copiar</button>
-                </div>
-            </div>
+      <div class="form-group">
+        <label for="rede">REDE</label>
+        <select id="rede" required>
+          <option value="" disabled selected>Selecione a rede</option>
+          <option value="opcao1">Opção 1</option>
+          <option value="opcao2">Opção 2</option>
+        </select>
+      </div>
 
-            <div class="result-group">
-                <label for="senhaResult">Senha</label>
-                <div class="input-copy-wrapper">
-                    <input type="text" id="senhaResult" readonly>
-                    <button type="button" class="btn-copy" onclick="copiarTexto('senhaResult', this)">Copiar</button>
-                </div>
-            </div>
-        </section>
-    </main>
+      <div class="form-group">
+        <label for="cidade">CIDADE</label>
+        <select id="cidade" required>
+          <option value="" disabled selected>Selecione...</option>
+          <option value="sp">São Paulo (SP)</option>
+          <option value="rj">Rio de Janeiro (RJ)</option>
+        </select>
+      </div>
 
-    <script src="js/cidades.js"></script>
-    <script src="js/script.js"></script>
+      <button type="submit" class="btn-submit">Gerar Acesso</button>
+    </form>
+
+    <div id="resultContainer" class="result-container">
+      <div class="form-group">
+        <label for="usuarioResult">USUÁRIO GERADO</label>
+        <div class="input-copy-group">
+          <input type="text" id="usuarioResult" readonly>
+          <button type="button" onclick="copiarTexto('usuarioResult', this)">Copiar</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="senhaResult">SENHA GERADA</label>
+        <div class="input-copy-group">
+          <input type="text" id="senhaResult" readonly>
+          <button type="button" onclick="copiarTexto('senhaResult', this)">Copiar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Desenvolvido por Alysson Cordeiro🏃🏻‍♂️‍➡️
+    </div>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
