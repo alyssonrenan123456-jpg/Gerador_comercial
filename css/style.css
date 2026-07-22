@@ -3,13 +3,11 @@
   --blue-hover: #003e99;
   --blue-glow: rgba(0, 82, 204, 0.4);
   --dark-navy: #0a192f;
-  --dark-header: #071224;
   --card-bg: rgba(255, 255, 255, 0.96);
   --text-main: #0f172a;
   --text-muted: #64748b;
   --border-light: #e2e8f0;
   --border-active: #0052cc;
-  --success-green: #10b981;
 }
 
 * {
@@ -49,62 +47,26 @@ body {
   background-color: rgba(7, 18, 36, 0.85);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 12px 24px;
+  padding: 16px 32px;
 }
 
 .nav-container {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 }
 
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
 }
 
 .logo-img {
-  height: 34px;
+  height: 42px; /* Dimensionamento adequado para a logo */
   width: auto;
   object-fit: contain;
-}
-
-.system-badge {
-  background: rgba(0, 82, 204, 0.2);
-  color: #60a5fa;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 4px 8px;
-  border-radius: 6px;
-  letter-spacing: 0.8px;
-  border: 1px solid rgba(96, 165, 250, 0.2);
-}
-
-.system-status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 6px 12px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  background-color: var(--success-green);
-  border-radius: 50%;
-  box-shadow: 0 0 8px var(--success-green);
-}
-
-.status-text {
-  color: #cbd5e1;
-  font-size: 12px;
-  font-weight: 500;
 }
 
 /* Invólucro Principal */
@@ -368,7 +330,6 @@ input[type="text"]:focus, select:focus {
 /* Responsividade Mobile */
 @media (max-width: 640px) {
   .navbar { padding: 12px 16px; }
-  .system-badge { display: none; }
   .portal-card { padding: 24px; }
   .footer {
     flex-direction: column;
