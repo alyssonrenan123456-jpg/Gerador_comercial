@@ -1,6 +1,3 @@
-/* ==========================================
-   RESET E ESTILOS GERAIS
-   ========================================== */
 * {
   margin: 0;
   padding: 0;
@@ -8,14 +5,11 @@
   font-family: 'Inter', sans-serif;
 }
 
+/* ==========================================
+   FUNDO DA PÁGINA (Com Esferas/Orbes Azuis)
+   ========================================== */
 body {
-  /* Fundo base suave para o vidro fosco se destacar */
-  background: 
-    radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.1) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 40%),
-    linear-gradient(135deg, #0b1c35 0%, #0f233f 100%);
-  
-  background-attachment: fixed;
+  background-color: #030712; /* Fundo base bem escuro para realçar os luzes */
   color: #1e293b;
   min-height: 100vh;
   display: flex;
@@ -23,48 +17,67 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+  position: relative;
+  overflow-x: hidden;
+  
+  /* Criação dos orbes abstratos desfocados no fundo */
+  background-image: 
+    radial-gradient(circle at 20% 25%, rgba(14, 165, 233, 0.35) 0%, transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(37, 99, 235, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 50% 75%, rgba(59, 130, 246, 0.3) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(2, 132, 199, 0.25) 0%, transparent 40%);
+  background-attachment: fixed;
 }
 
-/* ==========================================
-   CARD PRINCIPAL - O EFEITO DE VIDRO FOSCO
-   ========================================== */
 .main-wrapper {
   width: 100%;
   max-width: 480px;
   margin: auto;
-}
-
-.portal-card {
-  /* --- Efeito Glassmorphism --- */
-  background: rgba(255, 255, 255, 0.05); /* Levemente translúcido (quase transparente) */
-  border-radius: 16px;
-  padding: 32px 24px;
-  backdrop-filter: blur(20px); /* O "fosco" - Desfoque do fundo atrás do card */
-  -webkit-backdrop-filter: blur(20px); /* Suporte para Safari */
-  
-  /* Borda sutil de vidro para dar definição */
-  border: 1px solid rgba(255, 255, 255, 0.1); 
-  
-  /* Sombra sutil que flutua o vidro */
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 2;
 }
 
 /* ==========================================
-   ESTILOS DENTRO DO CARD (AJUSTES PARA O VIDRO)
+   CARD GLASSMORPHISM (Vidro Fosco Iluminado)
+   ========================================== */
+.portal-card {
+  /* Vidro fosco branco levemente transparente */
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  padding: 32px 24px;
+  
+  /* Efeito de desfoque intenso no fundo */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  
+  /* Borda sutil de brilho */
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  
+  /* Sombra elegante que faz o card flutuar */
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+}
+
+/* ==========================================
+   CABEÇALHO DO CARD
    ========================================== */
 .card-header h2 {
   font-size: 1.35rem;
-  font-weight: 700;
-  color: #ffffff; /* Ajuste para branco para contrastar com o vidro escuro */
+  font-weight: 800;
+  color: #0f172a;
   margin-bottom: 6px;
 }
 
 .card-header p {
   font-size: 0.85rem;
-  color: #cbd5e1; /* Ajuste para um cinza claro suave */
+  color: #475569;
   margin-bottom: 24px;
 }
 
+/* ==========================================
+   FORMULÁRIO E INPUTS
+   ========================================== */
 .form-portal {
   display: flex;
   flex-direction: column;
@@ -80,7 +93,7 @@ body {
 .form-group label {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #e2e8f0; /* Ajuste para cinza bem claro para legibilidade */
+  color: #334155;
   letter-spacing: 0.5px;
 }
 
@@ -95,7 +108,7 @@ body {
   left: 12px;
   width: 18px;
   height: 18px;
-  stroke: #cbd5e1; /* Ajuste para ícones mais claros */
+  stroke: #64748b;
   pointer-events: none;
 }
 
@@ -104,26 +117,19 @@ body {
   width: 100%;
   padding: 12px 12px 12px 40px;
   font-size: 0.9rem;
-  /* Inputs leves para não quebrar a estética */
-  border: 1px solid rgba(255, 255, 255, 0.05); 
+  border: 1px solid #cbd5e1;
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.02); 
-  color: #f1f5f9; /* Texto claro para inputs */
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #0f172a;
   outline: none;
   transition: all 0.2s;
 }
 
-/* Placeholder claro e discreto */
-.input-icon-wrapper input::placeholder,
-.input-icon-wrapper select::placeholder {
-  color: #94a3b8;
-}
-
 .input-icon-wrapper input:focus,
 .input-icon-wrapper select:focus {
-  border-color: rgba(2, 132, 199, 0.5); /* Borda azul de foco */
-  background-color: rgba(255, 255, 255, 0.05); /* Fundo sutil de foco */
-  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1); /* Brilho suave */
+  border-color: #2563eb;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 /* ==========================================
@@ -132,7 +138,7 @@ body {
 .btn-primary {
   width: 100%;
   padding: 14px;
-  background: linear-gradient(135deg, #0284c7 0%, #0046b8 100%); /* Gradiente no botão para dar destaque */
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
   color: #ffffff;
   font-weight: 700;
   font-size: 0.9rem;
@@ -144,15 +150,13 @@ body {
   align-items: center;
   gap: 8px;
   margin-top: 8px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  
-  /* Sombra sutil no botão */
-  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px); /* Efeito de elevação sutil no hover */
-  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
 }
 
 .btn-arrow {
@@ -161,13 +165,13 @@ body {
 }
 
 /* ==========================================
-   CARD DE RESULTADO
+   BLOCO DE RESULTADO
    ========================================== */
 .result-card {
   display: none;
   margin-top: 24px;
   padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05); /* Borda transparente */
+  border-top: 1px solid #e2e8f0;
 }
 
 .result-card.active {
@@ -178,8 +182,8 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #4ade80; /* Tom de verde mais vibrante para contraste */
-  font-weight: 600;
+  color: #16a34a;
+  font-weight: 700;
   font-size: 0.85rem;
   margin-bottom: 16px;
 }
@@ -198,7 +202,7 @@ body {
 .result-field label {
   font-size: 0.7rem;
   font-weight: 700;
-  color: #94a3b8; /* Cinza suave para labels */
+  color: #64748b;
 }
 
 .copy-box {
@@ -212,51 +216,48 @@ body {
   padding: 10px;
   font-family: monospace;
   font-weight: 600;
-  background: rgba(255, 255, 255, 0.02); /* Inputs de resultado leves e translúcidos */
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
   border-radius: 8px;
-  color: #f1f5f9;
+  color: #0f172a;
 }
 
 .copy-box button {
   padding: 0 16px;
-  background: rgba(2, 132, 199, 0.1); /* Botões de cópia leves */
-  color: #0284c7; /* Azul sutil */
-  border: 1px solid rgba(2, 132, 199, 0.1);
+  background: #dbeafe;
+  color: #1e40af;
+  border: none;
   border-radius: 8px;
   font-weight: 600;
   font-size: 0.8rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background 0.2s;
 }
 
 .copy-box button:hover {
-  background: rgba(2, 132, 199, 0.15);
-  color: #0ea5e9;
+  background: #bfdbfe;
 }
 
 /* ==========================================
-   BOTÃO DE VARIAÇÃO / LOGIN DUPLICADO
+   VARIAÇÃO / DUPLICADO
    ========================================== */
 .regenerate-wrapper {
   margin-top: 16px;
   padding-top: 12px;
-  border-top: 1px dashed rgba(255, 255, 255, 0.05); /* Borda transparente */
+  border-top: 1px dashed #cbd5e1;
   text-align: center;
 }
 
 .btn-link-variacao {
   background: none;
   border: none;
-  color: #0ea5e9; /* Azul bem claro e visível */
+  color: #2563eb;
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
 }
 
 .btn-link-variacao:hover {
-  color: #38bdf8; /* Azul ainda mais claro no hover */
   text-decoration: underline;
 }
 
@@ -264,10 +265,24 @@ body {
    RODAPÉ
    ========================================== */
 .footer {
-  color: #cbd5e1; /* Cinza claro suave */
+  color: #94a3b8;
   font-size: 0.8rem;
   text-align: center;
   margin-top: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-link {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
 }
 
 .footer-dev {
@@ -276,7 +291,7 @@ body {
 }
 
 /* ==========================================
-   MODAL (Ajuste para Glassmorphism)
+   MODAL
    ========================================== */
 .modal-overlay {
   position: fixed;
@@ -284,7 +299,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.6); /* Overlay mais escuro */
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -292,33 +307,11 @@ body {
 }
 
 .modal-box {
-  background: rgba(255, 255, 255, 0.05); /* Modal de vidro também */
+  background: rgba(255, 255, 255, 0.95);
   padding: 24px;
-  border-radius: 12px;
+  border-radius: 16px;
   max-width: 400px;
   width: 90%;
-  backdrop-filter: blur(15px); /* Menor desfoque para modal */
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-  color: #f1f5f9;
-}
-
-.modal-box h3 {
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-/* Input do modal também precisa de estilo */
-.modal-box input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.02);
-  color: #f1f5f9;
-  font-size: 0.9rem;
-}
-
-.modal-box input::placeholder {
-  color: #94a3b8;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
