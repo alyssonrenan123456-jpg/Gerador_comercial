@@ -94,10 +94,19 @@ app.post('/api/logs', async (req, res) => {
     const { atendente, login_criado, senha_criada } = req.body;
     let ipOrigem = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
     if (ipOrigem && ipOrigem.includes(',')) ipOrigem = ipOrigem.split(',')[0].trim();
+const agora = new Date();
 
-    const agora = new Date();
-    const data = agora.toLocaleDateString('pt-BR');
-    const horario = agora.toLocaleTimeString('pt-BR');
+// Força o fuso horário oficial de Brasília
+const data = agora.toLocaleDateString('pt-BR', { 
+  timeZone: 'America/Sao_Paulo' 
+});
+
+const horario = agora.toLocaleTimeString('pt-BR', { 
+  timeZone: 'America/Sao_Paulo',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit'
+});
 
     await queryTurso(
       'INSERT INTO logs (atendente, login_criado, senha_criada, data, horario, ip_origem) VALUES (?, ?, ?, ?, ?, ?)',
