@@ -100,15 +100,6 @@ function gerarLogin(nomeCompleto, sigla, modo = 0) {
                 nomeFormatado = ultimoNome ? `${primeiroNome}.${ultimoNome}2` : `${primeiroNome}2`;
             }
             break;
-        case 3:
-            // Variação 3: Adiciona o número 2 no final -> ex: joao.agostin2.ctb
-            nomeFormatado = ultimoNome ? `${primeiroNome}.${ultimoNome}3` : `${primeiroNome}3`;
-            break;
-        default:
-            // Padrão (modo 0): primeiro.ultimo.cidade -> ex: joao.agostin.ctb
-            nomeFormatado = ultimoNome ? `${primeiroNome}.${ultimoNome}` : primeiroNome;
-            break;
-    }
 
     return `${nomeFormatado}.${sigla}`;
 }
