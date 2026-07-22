@@ -5,8 +5,9 @@ const ipaddr = require('ipaddr.js');
 
 const app = express();
 
+// Conexão direta com o Turso usando protocolo libsql://
 const db = createClient({
-  url: 'libsql://logscomercial-alyssonrenan123456-jpg.aws-us-east-1.turso.io', // Cole a URL do Turso aqui
+  url: 'libsql://logscomercial-alyssonrenan123456-jpg.aws-us-east-1.turso.io',
   authToken: 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3ODQ3MjI4NTgsImlkIjoiMDE5Zjg5YzMtYzIwMS03ZmFmLWI1YjItZTU1ZjUzNGZjZTAzIiwia2lkIjoicDRjeVRXTlZ5YWUtMXRUSkh6S2w0ZU54bUZVRm8ySXhTaDdTRHJkRWJxQSIsInJpZCI6IjdlNmU4MzYyLTg1YzUtNDIyOC04NTAxLTE4YThlMTQzNzU4MCJ9.zje1JEqAcrMc1b-md3gVOH9L6eV1vrnAYNakSVpcoAYqH8nV43L48JzHkq843jYnRCZfZELPPeeUTyokkFt5CA',       // Cole o Token do Turso aqui
 });
 
@@ -14,6 +15,7 @@ const FAIXA_ADMIN_AUTORIZADA = '177.37.73.0/24';
 
 app.use(express.json());
 
+// Validação de IP
 function ipEstaNaFaixa(ipCliente, faixaCidr) {
   try {
     if (!ipCliente) return false;
@@ -53,7 +55,7 @@ function verificarIpAdmin(req, res, next) {
   `);
 }
 
-// Salvar log (Usado pelos atendentes)
+// Rota de Salvar Log
 app.post('/api/logs', async (req, res) => {
   try {
     const { atendente, login_criado, senha_criada } = req.body;
@@ -65,20 +67,21 @@ app.post('/api/logs', async (req, res) => {
     const horario = agora.toLocaleTimeString('pt-BR');
 
     await db.execute({
-      sql: `INSERT INTO logs (atendente, login_criado, senha_criada, data, horario, ip_origem) VALUES (?, ?, ?, ?, ?, ?)`,
+      sql: 'INSERT INTO logs (atendente, login_criado, senha_criada, data, horario, ip_origem) VALUES (?, ?, ?, ?, ?, ?)',
       args: [atendente, login_criado, senha_criada, data, horario, ipOrigem]
     });
 
     res.json({ success: true });
   } catch (err) {
-    res.status(500).json({ error: 'Erro ao salvar o registro no Turso.' });
+    console.error('Erro no POST /api/logs:', err);
+    res.status(500).json({ error: 'Erro ao salvar o registro no Turso.', details: err.message });
   }
 });
 
-// Buscar logs (Protegido por IP)
+// Rota de Buscar Logs
 app.get('/api/admin/logs', verificarIpAdmin, async (req, res) => {
   try {
-    const result = await db.execute(`SELECT * FROM logs ORDER BY id DESC`);
+    const result = await db.execute('SELECT * FROM logs ORDER BY id DESC');
     const rows = result.rows;
 
     const logsAgrupados = rows.reduce((acc, item) => {
@@ -89,11 +92,12 @@ app.get('/api/admin/logs', verificarIpAdmin, async (req, res) => {
 
     res.json(logsAgrupados);
   } catch (err) {
-    res.status(500).json({ error: 'Erro ao consultar os logs.' });
+    console.error('Erro no GET /api/admin/logs:', err);
+    res.status(500).json({ error: 'Erro ao consultar os logs.', details: err.message });
   }
 });
 
-// Tela do Admin (Protegida por IP)
+// Página de Admin
 app.get('/admin/logs', verificarIpAdmin, (req, res) => {
   res.sendFile(path.join(__dirname, '../admin_logs.html'));
 });
