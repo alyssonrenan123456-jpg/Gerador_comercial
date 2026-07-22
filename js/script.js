@@ -20,20 +20,20 @@ function removerAcentos(texto) {
 }
 
 function gerarLogin(nomeCompleto, sigla) {
-    // 1. Remove acentos, caracteres especiais e converte para minúsculas
+    // 1. Limpa acentos e caracteres especiais
     let limpo = removerAcentos(nomeCompleto)
         .toLowerCase()
         .replace(/[^a-z0-9\s]/g, '')
         .trim();
 
-    // 2. Divide o nome em partes usando os espaços
+    // 2. Separa por espaços
     let partes = limpo.split(/\s+/);
 
-    // 3. Pega o primeiro e o último nome
+    // 3. Pega primeiro e último nome
     let primeiroNome = partes[0];
     let ultimoNome = partes.length > 1 ? partes[partes.length - 1] : '';
 
-    // 4. Se houver apenas um nome, usa só ele; se houver mais, junta o primeiro e o último
+    // 4. Formata como primeiro.ultimo (ou só primeiro caso só tenha 1)
     let nomeFormatado = ultimoNome ? `${primeiroNome}.${ultimoNome}` : primeiroNome;
 
     return `${nomeFormatado}.${sigla}`;
