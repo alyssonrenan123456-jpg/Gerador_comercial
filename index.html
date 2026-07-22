@@ -2,54 +2,74 @@
 <html lang="pt-BR">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Login - Ultra Telecom</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Gerador de Login</title>
-
-<link rel="stylesheet" href="css/style.css">
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
 <div class="container">
 
-<img src="img/logo.png" class="logo">
+    <img src="img/logo.png" alt="Ultra Telecom" class="logo">
 
-<h1>Gerador de Login</h1>
+    <h1>Gerador de Login</h1>
 
-<label>Nome do Cliente</label>
-<input type="text" id="nome">
+    <div class="campo">
+        <label for="nome">Nome do Cliente</label>
+        <input
+            type="text"
+            id="nome"
+            placeholder="Digite o nome do cliente">
+    </div>
 
-<label>Cidade</label>
-<select id="cidade">
+    <div class="campo">
+        <label for="cidade">Cidade</label>
 
-<option>Monte Carlo</option>
-<option>Fraiburgo</option>
-<option>Caçador</option>
+        <select id="cidade">
+            <option value="">Carregando cidades...</option>
+        </select>
+    </div>
 
-</select>
+    <button onclick="gerarLogin()">
+        Gerar Login
+    </button>
 
-<button onclick="gerarLogin()">
-Gerar Login
-</button>
+    <div id="resultado">
 
-<div id="resultado">
+        <div class="resultado-item">
 
-<h3>Usuário</h3>
+            <div>
+                <h3>Usuário</h3>
+                <p id="usuario"></p>
+            </div>
 
-<p id="usuario"></p>
+            <button onclick="copiar('usuario')">
+                Copiar
+            </button>
 
-<h3>Senha</h3>
+        </div>
 
-<p id="senha"></p>
+        <div class="resultado-item">
+
+            <div>
+                <h3>Senha</h3>
+                <p id="senha"></p>
+            </div>
+
+            <button onclick="copiar('senha')">
+                Copiar
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
-</div>
-
+<script src="js/cidades.js"></script>
 <script src="js/script.js"></script>
 
 </body>
