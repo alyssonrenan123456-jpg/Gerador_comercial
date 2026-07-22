@@ -3,59 +3,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gerador de Login | Ultra Telecom</title>
+  <title>Portal de Acessos | Ultra Telecom</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <main class="card">
-    <header class="card-header">
-      <div class="brand">
-        <span class="ultra">ULTRA</span>
-        <span class="telecom">TELECOM</span>
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand-logo">
+        <img src="img/logo.png" alt="Ultra Telecom" class="logo-img">
+        <span class="system-badge">PORTAL INTERNO</span>
       </div>
-      <div class="app-title">Gerador de Login</div>
-    </header>
-
-    <form id="loginForm" class="form">
-      <div class="form-group">
-        <label for="nome">NOME COMPLETO DO CLIENTE</label>
-        <input type="text" id="nome" placeholder="Ex: João Carlos Silva" required autocomplete="off">
-      </div>
-
-      <div class="form-group">
-        <label for="cidade">CIDADE DO ACESSO</label>
-        <select id="cidade" required>
-          <option value="" disabled selected>Selecione a cidade...</option>
-    
-          </select>
-      </div>
-
-      <button type="submit" class="btn-generate">GERAR ACESSO</button>
-    </form>
-
-    <div id="resultContainer" class="result-area">
-      <div class="result-box">
-        <label>USUÁRIO</label>
-        <div class="copy-wrapper">
-          <input type="text" id="usuarioResult" readonly>
-          <button onclick="copiarTexto('usuarioResult', this)">Copiar</button>
-        </div>
-      </div>
-
-      <div class="result-box">
-        <label>SENHA</label>
-        <div class="copy-wrapper">
-          <input type="text" id="senhaResult" readonly>
-          <button onclick="copiarTexto('senhaResult', this)">Copiar</button>
-        </div>
+      <div class="system-status">
+        <span class="status-dot"></span>
+        <span class="status-text">Rede Operacional</span>
       </div>
     </div>
+  </header>
 
-    <footer class="footer">
-      Desenvolvido por <strong>Alysson Cordeiro</strong> 🏃🏻‍♂️‍➡️
-    </footer>
+  <div class="bg-network-overlay"></div>
+
+  <main class="main-wrapper">
+    <section class="portal-card">
+      <div class="card-header">
+        <h2>Gerador de Login de Acesso</h2>
+        <p>Preencha os dados do cliente para provisionar a credencial no sistema.</p>
+      </div>
+
+      <form id="loginForm" class="form-portal">
+        
+        <div class="form-group">
+          <label for="nome">NOME COMPLETO DO CLIENTE</label>
+          <div class="input-icon-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <input type="text" id="nome" placeholder="Ex: João Carlos Silva" required autocomplete="off">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cidade">CIDADE DO ACESSO</label>
+          <div class="input-icon-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <select id="cidade" required>
+              <option value="" disabled selected>Selecione a cidade...</option>
+              <option value="sp">São Paulo (SP)</option>
+              <option value="rj">Rio de Janeiro (RJ)</option>
+              <option value="cur">Curitiba (PR)</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary">
+          <span>GERAR ACESSO</span>
+          <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </form>
+
+      <div id="resultContainer" class="result-card">
+        <div class="result-header">
+          <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          <span>Credencial Provisionada com Sucesso</span>
+        </div>
+
+        <div class="result-grid">
+          <div class="result-field">
+            <label>USUÁRIO GERADO</label>
+            <div class="copy-box">
+              <input type="text" id="usuarioResult" readonly>
+              <button type="button" onclick="copiarTexto('usuarioResult', this)">Copiar</button>
+            </div>
+          </div>
+
+          <div class="result-field">
+            <label>SENHA GERADA</label>
+            <div class="copy-box">
+              <input type="text" id="senhaResult" readonly>
+              <button type="button" onclick="copiarTexto('senhaResult', this)">Copiar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer class="footer">
+    <span>Ultra Telecom © 2026 • Painel Interno de Engenharia</span>
+    <span class="footer-dev">Desenvolvido por <strong>Alysson Cordeiro</strong></span>
+  </footer>
 
   <script src="js/cidades.js"></script>
   <script src="js/script.js"></script>
