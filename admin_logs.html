@@ -30,18 +30,32 @@
 
   <script>
     async function carregarLogs() {
-      try {
-        const res = await fetch('/api/admin/logs');
-        if (res.status === 403) {
-          document.body.innerHTML = '<h2 style="color:red; text-align:center; margin-top:50px;">403 Acesso Negado</h2>';
-          return;
-        }
-        const data = await res.json();
-        renderizarLogs(data);
-      } catch (err) {
-        document.getElementById('logsContainer').innerText = 'Erro ao carregar os logs.';
-      }
+  try {
+    const res = await fetch('/api/admin/logs');
+    
+    if (res.status === 403) {
+      document.body.innerHTML = '<h2 style="color:red; text-align:center; margin-top:50px;">403 Acesso Negado</h2>';
+      return;
     }
+
+    const data = await res.json();
+
+    // Se o backend retornou um erro interno (status 500)
+    if (!res.ok) {
+      document.getElementById('logsContainer').innerHTML = `
+        <div style="background:#450a0a; color:#fca5a5; padding:16px; border-radius:8px; border:1px solid #ef4444;">
+          <strong>Erro ao buscar logs:</strong> ${data.error || 'Erro desconhecido'}<br>
+          <small><strong>Detalhes:</strong> ${data.details || 'Sem detalhes informados'}</small>
+        </div>
+      `;
+      return;
+    }
+
+    renderizarLogs(data);
+  } catch (err) {
+    document.getElementById('logsContainer').innerText = 'Erro de conexão: ' + err.message;
+  }
+}
 
     function renderizarLogs(logsAgrupados) {
       const container = document.getElementById('logsContainer');
