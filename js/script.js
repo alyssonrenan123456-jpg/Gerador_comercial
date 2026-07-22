@@ -1,14 +1,11 @@
-// Controle de variação do login
 let contadorVariacao = 0;
 
-// Controle do nome do atendente
 document.addEventListener('DOMContentLoaded', () => {
     const nomeSalvo = localStorage.getItem('atendente_nome');
     if (!nomeSalvo) {
         document.getElementById('modalAtendente').style.display = 'flex';
     }
 
-    // Evento para o botão de variação/login duplicado
     const btnVariacao = document.getElementById('btnVariacaoLogin');
     if (btnVariacao) {
         btnVariacao.addEventListener('click', gerarVariacaoLogin);
@@ -26,11 +23,9 @@ document.getElementById('btnSalvarAtendente').addEventListener('click', () => {
     }
 });
 
-// Evento de submissão do formulário
 document.getElementById('loginForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    // Reseta o contador de variações sempre que um novo formulário é submetido
     contadorVariacao = 0;
 
     const nomeInput = document.getElementById('nome').value;
@@ -41,7 +36,6 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     processarEGerarAcesso(nomeInput, siglaCidade, contadorVariacao);
 });
 
-// Função para tratar os padrões de login com base no contador
 function processarEGerarAcesso(nomeInput, siglaCidade, modoVariacao) {
     const nomeAtendente = localStorage.getItem('atendente_nome') || 'Não identificado';
     
@@ -52,19 +46,16 @@ function processarEGerarAcesso(nomeInput, siglaCidade, modoVariacao) {
     document.getElementById('senhaResult').value = senha;
     document.getElementById('resultContainer').classList.add('active');
 
-    // Envia Log para a API Turso
     salvarLog(nomeAtendente, usuario, senha);
 }
 
-// Handler para o clique no botão de variação
 function gerarVariacaoLogin() {
     const nomeInput = document.getElementById('nome').value;
     const siglaCidade = document.getElementById('cidade').value;
 
     if (!nomeInput.trim() || !siglaCidade) return;
 
-    // Incrementa a variação (1, 2, 3...)
-    contadorVariacao++;
+    contadorVariacao = contadorVariacao === 0 ? 1 : 0;
     processarEGerarAcesso(nomeInput, siglaCidade, contadorVariacao);
 }
 
@@ -72,34 +63,23 @@ function removerAcentos(texto) {
     return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-// Função de geração de login adaptada com suporte a variações
 function gerarLogin(nomeCompleto, sigla, modo = 0) {
     let limpo = removerAcentos(nomeCompleto)
         .toLowerCase()
-        .replace(/[^a-z0-9\s]/g, '')
+        .replace(/[^a-z\s]/g, '')
         .trim();
 
-    let partes = limpo.split(/\s+/);
-    let primeiroNome = partes[0];
-    let segundoNome = partes.length > 2 ? partes[1] : '';
+    let partes = limpo.split(/\s+/).filter(Boolean);
+    let primeiroNome = partes[0] || 'usuario';
     let ultimoNome = partes.length > 1 ? partes[partes.length - 1] : '';
 
     let nomeFormatado = '';
 
-    // Lógica de Variações de Nome:
-    switch (modo % 4) {
-        case 1:
-            // Variação 1: Inverte (sobrenome.nome.cidade) -> ex: agostin.joao.ctb
-            nomeFormatado = ultimoNome ? `${ultimoNome}.${primeiroNome}` : `${primeiroNome}1`;
-            break;
-        case 2:
-            // Variação 2: Inclui o segundo nome se existir ou adiciona sufixo '2'
-            if (segundoNome) {
-                nomeFormatado = `${primeiroNome}.${segundoNome}`;
-            } else {
-                nomeFormatado = ultimoNome ? `${primeiroNome}.${ultimoNome}2` : `${primeiroNome}2`;
-            }
-            break;
+    if (modo % 2 === 1 && ultimoNome) {
+        nomeFormatado = `${ultimoNome}.${primeiroNome}`;
+    } else {
+        nomeFormatado = ultimoNome ? `${primeiroNome}.${ultimoNome}` : primeiroNome;
+    }
 
     return `${nomeFormatado}.${sigla}`;
 }
