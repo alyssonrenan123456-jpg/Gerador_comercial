@@ -3,79 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gerador de Login - Ultra</title>
-  
+  <title>Gerador de Login | Ultra Telecom</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <main class="card-container">
+  <main class="card">
     <header class="card-header">
-      <h1 class="brand-title">ULTRA <span>TELECOM</span></h1>
-      <button id="themeToggle" class="btn-icon" title="Alternar tema">☀️</button>
+      <div class="brand">
+        <span class="ultra">ULTRA</span>
+        <span class="telecom">TELECOM</span>
+      </div>
+      <div class="app-title">Gerador de Login</div>
     </header>
-
-    <nav class="tabs">
-      <button type="button" class="tab-btn active">Gerador de Login</button>
-      <button type="button" class="tab-btn">Formatador de MAC</button>
-    </nav>
 
     <form id="loginForm" class="form">
       <div class="form-group">
-        <label for="nome">NOME DO CLIENTE</label>
-        <input type="text" id="nome" placeholder="Ex: João Silva" required autocomplete="off">
+        <label for="nome">NOME COMPLETO DO CLIENTE</label>
+        <input type="text" id="nome" placeholder="Ex: João Carlos Silva" required autocomplete="off">
       </div>
 
       <div class="form-group">
-        <label>TIPO DE LOGIN</label>
-        <div class="btn-group">
-          <button type="button" class="btn-toggle active">REDE NEUTRA</button>
-          <button type="button" class="btn-toggle">PADRÃO / LOCAL</button>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="rede">REDE</label>
-        <select id="rede" required>
-          <option value="" disabled selected>Selecione a rede</option>
-          <option value="opcao1">Opção 1</option>
-          <option value="opcao2">Opção 2</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="cidade">CIDADE</label>
+        <label for="cidade">CIDADE DO ACESSO</label>
         <select id="cidade" required>
-          <option value="" disabled selected>Selecione...</option>
+          <option value="" disabled selected>Selecione a cidade...</option>
           <option value="sp">São Paulo (SP)</option>
           <option value="rj">Rio de Janeiro (RJ)</option>
-        </select>
+          <option value="cur">Curitiba (PR)</option>
+          </select>
       </div>
 
-      <button type="submit" class="btn-submit">Gerar Acesso</button>
+      <button type="submit" class="btn-generate">GERAR ACESSO</button>
     </form>
 
-    <div id="resultContainer" class="result-container">
-      <div class="form-group">
-        <label for="usuarioResult">USUÁRIO GERADO</label>
-        <div class="input-copy-group">
+    <div id="resultContainer" class="result-area">
+      <div class="result-box">
+        <label>USUÁRIO</label>
+        <div class="copy-wrapper">
           <input type="text" id="usuarioResult" readonly>
-          <button type="button" onclick="copiarTexto('usuarioResult', this)">Copiar</button>
+          <button onclick="copiarTexto('usuarioResult', this)">Copiar</button>
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="senhaResult">SENHA GERADA</label>
-        <div class="input-copy-group">
+      <div class="result-box">
+        <label>SENHA</label>
+        <div class="copy-wrapper">
           <input type="text" id="senhaResult" readonly>
-          <button type="button" onclick="copiarTexto('senhaResult', this)">Copiar</button>
+          <button onclick="copiarTexto('senhaResult', this)">Copiar</button>
         </div>
       </div>
     </div>
 
-    <div class="footer">
-      Desenvolvido por Alysson Cordeiro🏃🏻‍♂️‍➡️
-    </div>
+    <footer class="footer">
+      Desenvolvido por <strong>Alysson Cordeiro</strong> 🏃🏻‍♂️‍➡️
+    </footer>
   </main>
 
   <script src="js/cidades.js"></script>
